@@ -1,68 +1,86 @@
 #include "main.h"
 
 /**
- * base_len - calculates the lenght of num in base
- * @num: number to be converted
- * @base: base
- * Return: lenght
- */
-unsigned int base_len(unsigned int num, int base)
-{
-	unsigned int i;
-
-	i = 0;
-	while (num > 0)
-	{
-		num /= base;
-		i++;
-	}
-	return (i);
-}
-
-/**
- * rev_str - reverses a string in place
+ * is_printable - Evaluates if a char is printable
+ * @c: Char to be evaluated.
  *
- * @s: string to reverse
- * Return: A pointer to a character
+ * Return: 1 if c is printable, 0 otherwise
  */
-char *rev_str(char *s)
+int is_printable(char c)
 {
-	int l;
-	int h;
-	char tmp;
-	char *dest;
+	if (c >= 32 && c < 127)
+		return (1);
 
-	l = 0;
-	while (s[l] != '\0')
-		l++;
-
-	dest = malloc(sizeof(char) * l + 1);
-	if (dest == NULL)
-		return (NULL);
-
-	_memcpy(dest, s, l);
-	for (h = 0; h < l; h++, l--)
-	{
-		tmp = dest[l - 1];
-		dest[l - 1] = dest[h];
-		dest[h] = tmp;
-	}
-	return (dest);
+	return (0);
 }
 
 /**
- * _memcpy - copy memory area
- * @dest: Destination for copying
- * @src: Source to copy from
- * @n: The number of bytes to copy
- * Return: The _memcpy() function returns a pointer to dest.
+ * append_hexa_code - Append ascci in hexadecimal code to buffer
+ * @buffer: Array of chars.
+ * @i: Index at which to start appending.
+ * @ascii_code: ASSCI CODE.
+ * Return: Always 3
  */
-char *_memcpy(char *dest, char *src, unsigned int n)
+int append_hexa_code(char ascii_code, char buffer[], int i)
 {
-	unsigned int i;
+	char map_to[] = "0123456789ABCDEF";
+	/* The hexa format code is always 2 digits long */
+	if (ascii_code < 0)
+		ascii_code *= -1;
 
-	for (i = 0; i < n; i++)
-		dest[i] = src[i];
-	dest[i] = '\0';
-	return (dest);
+	buffer[i++] = '\\';
+	buffer[i++] = 'x';
+
+	buffer[i++] = map_to[ascii_code / 16];
+	buffer[i] = map_to[ascii_code % 16];
+
+	return (3);
+}
+
+/**
+ * is_digit - Verifies if a char is a digit
+ * @c: Char to be evaluated
+ *
+ * Return: 1 if c is a digit, 0 otherwise
+ */
+int is_digit(char c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+
+	return (0);
+}
+
+/**
+ * convert_size_number - Casts a number to the specified size
+ * @num: Number to be casted.
+ * @size: Number indicating the type to be casted.
+ *
+ * Return: Casted value of num
+ */
+long int convert_size_number(long int num, int size)
+{
+	if (size == S_LONG)
+		return (num);
+	else if (size == S_SHORT)
+		return ((short)num);
+
+	return ((int)num);
+}
+
+/**
+ * convert_size_unsgnd - Casts a number to the specified size
+ * @num: Number to be casted
+ * @size: Number indicating the type to be casted
+ *
+ * Return: Casted value of num
+ */
+long int convert_size_unsgnd(unsigned long int num, int size)
+{
+	if (size == S_LONG)
+		return (num);
+	else if (size == S_SHORT)
+		return ((unsigned short)num);
+
+	return ((unsigned int)num);
 }
