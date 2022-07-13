@@ -1,41 +1,33 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdio.h>
-#include <stddef.h>
-#include <limits.h>
 
 /**
- * _printf - prints formatted data to stdout
- * @format: string that contains the format to print
- * Return: number of characters written
+ * _printf - prints a formated string
+ * @format: string containing characters to be printed and their format
+ * Return: length of string printed
  */
-
-int _printf(const char * const format, ...)
+int _printf(const char *format, ...)
 {
+	int num_p;
+	convert_t func_l[] = {
+		{"c", print_char},
+		{"s", print_string},
+		{"%", print_percent},
+		{"d", print_integer},
+		{"i", print_integer},
+		/* {"b", print_binary}, */
+		/* {"u", print_unsigned_integer}, */
+		/* {"o", print_octal}, */
+		/* {"x", print_hex_x}, */
+		/* {"X", print_hex_X}, */
+		{NULL, NULL}
+	};
 	va_list args;
-	int i = 0, output = 0;
-	int (*func)(va_list);
+
+	if (format == NULL)
+		return (-1);
 
 	va_start(args, format);
-
-	while (format[i] != '\0')
-	{
-		if (format[i] == '%')
-		{
-			func = _select_func(format[i + 1]);
-			if (func != NULL)
-			{
-			output += func(args);
-			i++;
-			}
-		}
-		else
-		{
-			_putchar(format[i]);
-			output++;
-		}
-		i++;
-	}
+	num_p = parse_format(format, func_l, args);
 	va_end(args);
-	return (output);
+	return (num_p);
 }

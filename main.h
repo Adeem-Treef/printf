@@ -1,20 +1,33 @@
 #ifndef MAIN_H
 #define MAIN_H
 #include <stdarg.h>
+#include <stddef.h>
+#include <limits.h>
+
+/**
+ * struct convert - format types
+ * @spc: specification
+ * @f: function pointer
+ */
+typedef struct convert
+{
+	char *spc;
+	int (*f)(va_list args);
+} convert_t;
 
 int _putchar(char c);
-int _print_int(va_list args);
-int _print_char(va_list args);
-int _print_str(va_list args);
-int _print_bin(va_list args);
-int _print_dec(va_list args);
 int _printf(const char *format, ...);
-int _print_perc(va_list args);
-int (*_select_func(const char c))(va_list);
-int _print_octal(va_list args);
-int _print_unint(va_list args);
-int _print_x(va_list args);
-int _print_X(va_list args);
-int _print_hex(unsigned int n, unsigned int c);
+int print_char(va_list args_l);
+int print_string(va_list args_l);
+int print_percent(va_list args_l);
+int print_integer(va_list args_l);
+int print_unsigned_integer(va_list args_l);
+int print_number(va_list args_l);
+int print_unsgined_number(unsigned int n);
+int print_binary(va_list args_l);
+int print_octal(va_list args_l);
+int print_hex_x(va_list args_l);
+int print_hex_X(va_list args_l);
+int parse_format(const char *format, convert_t f_list[], va_list args);
 
 #endif
