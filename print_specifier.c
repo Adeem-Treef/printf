@@ -66,9 +66,9 @@ int print_unsigned_integer(va_list args_l)
 	n = va_arg(args_l, unsigned int);
 
 	if (n == 0)
-		return (print_unsgined_number(n));
+		return (print_unsigned_number(n));
 
 	if (n < 1)
 		return (-1);
-	return (print_unsgined_number(n));
+	return (print_unsigned_number(n));
 }

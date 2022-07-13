@@ -11,6 +11,7 @@ int _printf(const char *format, ...)
 	convert_t func_l[] = {
 		{"c", print_char},
 		{"s", print_string},
+		{"S", print_custom_string},
 		{"%", print_percent},
 		{"d", print_integer},
 		{"i", print_integer},

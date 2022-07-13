@@ -20,11 +20,12 @@ int _putchar(char c);
 int _printf(const char *format, ...);
 int print_char(va_list args_l);
 int print_string(va_list args_l);
+int print_custom_string(va_list args_l);
 int print_percent(va_list args_l);
 int print_integer(va_list args_l);
 int print_unsigned_integer(va_list args_l);
 int print_number(va_list args_l);
-int print_unsgined_number(unsigned int n);
+int print_unsigned_number(unsigned int n);
 int print_binary(va_list args_l);
 int print_octal(va_list args_l);
 int print_x(va_list args_l);
@@ -38,6 +39,6 @@ int test_print_char(void);
 unsigned int base_len(unsigned int num, int base);
 char *rev_str(char *);
 char *_memcpy(char *, char *, unsigned int );
-int hex_check(int num, char x);
+int _print_hex(unsigned int n, unsigned int c);
 
 #endif

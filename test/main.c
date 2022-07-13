@@ -9,7 +9,7 @@
  */
 int main(void)
 {
-    int len;
+    int len, l;
     int len2;
     unsigned int ui;
     void *addr;
@@ -34,6 +34,9 @@ int main(void)
     printf("Character:[%c]\n", 'H');
     _printf("String:[%s]\n", "I am a string !");
     printf("String:[%s]\n", "I am a string !");
+    _printf("Another String: %S\n", "Best\nSchool");
+    l = _printf("Could you print some non-prntable characters?\n%S\nThanks!\n", "Sure:\x1F\x7F\n");
+    _printf("Length:[%d]\n", l);
     _printf("Address:[%p]\n", addr);
     printf("Address:[%p]\n", addr);
     len = _printf("Percent:[%%]\n");
