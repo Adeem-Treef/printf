@@ -8,7 +8,6 @@
  * @args: receives the arguments
  * Return: 1 on success.
  */
-
 int _print_char(va_list args)
 {
 	unsigned char c;

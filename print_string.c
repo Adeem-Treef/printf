@@ -9,7 +9,6 @@
  * @args: receives the list of arguments passed
  * Return: 1
  */
-
 int _print_str(va_list args)
 {
 	unsigned int x = 0;

@@ -1,4 +1,5 @@
 #include "main.h"
+
 /**
 * _print_hex - function that prints an unsigned int in hexadecimal
 * @n: unsigned to be printed
@@ -46,6 +47,7 @@ int _print_hex(unsigned int n, unsigned int c)
 	}
 	return (count);
 }
+
 /**
 * _print_x - takes an unsigned int an prints it in lowercase hex
 * @args: unsigned int to print

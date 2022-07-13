@@ -9,7 +9,6 @@
  * @args: va_list arguements from _printf
  * Return: number of character printed
  */
-
 int _print_perc(va_list args)
 {
 

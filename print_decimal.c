@@ -6,7 +6,6 @@
  * @args: Receives the argument passed
  * Return: Value.
  */
-
 int _print_dec(va_list args)
 {
 	int n = va_arg(args, int);
