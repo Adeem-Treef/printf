@@ -30,4 +30,7 @@ int print_hex_x(va_list args_l);
 int print_hex_X(va_list args_l);
 int parse_format(const char *format, convert_t f_list[], va_list args);
 
+/* ====TESTS==== */
+int test_print_char(void);
+
 #endif

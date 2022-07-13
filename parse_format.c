@@ -10,21 +10,22 @@
  */
 int parse_format(const char *format, convert_t *f_list, va_list args)
 {
-	int i, j, ret_val, c;
+	int i, j, r_val, c;
 
 	c = 0;
 	for (i = 0; format[i] != '\0'; i++)
 	{
 		if (format[i] == '%')
 		{
+			/*Iterates through f_list matching function*/
 			for (j = 0; f_list[j].spc != NULL; j++)
 			{
 				if (format[i + 1] == f_list[j].spc[0])
 				{
-					ret_val = f_list[1].f(args);
-					if (ret_val == -1)
+					r_val = f_list[j].f(args);
+					if (r_val == -1)
 						return (-1);
-					c += ret_val;
+					c += r_val;
 					break;
 				}
 			}
