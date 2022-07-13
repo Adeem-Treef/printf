@@ -32,12 +32,12 @@ int print_custom_string(va_list args_l)
 {
 	int i;
 	char *s;
-	
+
 	s = va_arg(args_l, char *);
 	if (s == NULL)
 		s = "(null)";
 	for (i = 0; s[i] != '\0'; i++)
-		if ((s[i] > 0 && s[i] <32) || s[i] >= 127)
+		if ((s[i] > 0 && s[i] < 32) || s[i] >= 127)
 		{
 			replace_special_char(s[i]);
 		}
