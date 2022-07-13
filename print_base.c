@@ -88,109 +88,69 @@ int print_octal(va_list args_l)
 }
 
 /**
- * print_hex_x - Prints a representation of a decimal number on base16 lowercase
- * @ars_l: List of the arguments passed to the function
- * Return: Number of characters printed
- */
-int print_hex_x(va_list args_l)
+* _print_hex - function that prints an unsigned int in hexadecimal
+* @n: unsigned to be printed
+* @c: case of printing (0 = lower, 1 = upper)
+* Return: size of the character written
+*/
+int _print_hex(unsigned int n, unsigned int c)
 {
-	unsigned int n;
-	int i, l, rem_num;
-	char *p, *rev_s;
+	unsigned int length = 0, power = 1, k, digit, number;
+	int count = 0;
+	char diff;
 
-	n = va_arg(args_l, unsigned int);
-
-	if (n == 0)
-		return (_putchar('0'));
-	if (n < 1)
-		return (-1);
-	l = base_len(n, 16);
-	p = malloc(sizeof(char) * l + 1);
-	if (p == NULL)
-		return (-1);
-	for (l = 0; n > 0; l++)
+	if (n != 0)
 	{
-		rem_num = n % 16;
-		if (rem_num > 9)
-		{
-			rem_num = hex_check(rem_num, 'x');
-			p[l] = rem_num;
-		}
+		number = n;
+		if (c)
+			diff = 'A' - ':';
 		else
-			p[l] = rem_num + 48;
-		n /= 16;
-	}
-	p[l] = '\0';
-	rev_s = rev_str(p);
-	if (rev_s == NULL)
-		return (-1);
-	for (i = 0; p[i] != '\0'; i++)
-		_putchar(p[i]);
-	free(p);
-	free(rev_s);
-	return (l);
-}
-
-
-/**
- * print_hex_X - Prints a representation of a decimal number on base16 Uppercase
- * @args_l: List of the arguments passed to the function
- * Return: Number of characters printed
- */
-int print_hex_X(va_list args_l)
-{
-	unsigned int n;
-	int i, l, rem_num;
-	char *p, *rev_s;
-
-	n = va_arg(args_l, unsigned int);
-
-	if (n == 0)
-		return (_putchar('0'));
-	if (n < 1)
-		return (-1);
-	l = base_len(n, 16);
-	p = malloc(sizeof(char) * l + 1);
-	if (p == NULL)
-		return (-1);
-	for (l = 0; n > 0; l++)
-	{
-		rem_num = n % 16;
-		if (rem_num > 9)
+			diff = 'a' - ':';
+		while (number != 0)
 		{
-			rem_num = hex_check(rem_num, 'X');
-			p[l] = rem_num;
+			number /= 16;
+			length++;
 		}
-		else
-			p[l] = rem_num + 48;
-		n /= 16;
+		for (k = 1; k <= length - 1; k++)
+		{
+			power *= 16;
+		}
+		for (k = 1; k <= length; k++)
+		{
+			digit = n / power;
+			if (digit < 10)
+				_putchar(digit + '0');
+			else
+				_putchar(digit + '0' + diff);
+			count++;
+			n -= digit * power;
+			power /= 16;
+		}
 	}
-	p[l] = '\0';
-	rev_s = rev_str(p);
-	if (rev_s == NULL)
-		return (-1);
-	for (i = 0; p[i] != '\0'; i++)
-		_putchar(p[i]);
-	free(p);
-	free(rev_s);
-	return (l);
-}
-
-/**
- * hex_check - Checks which hex function is calling it
- * @num: Number to convert into letter
- * @x: Tells which hex function is calling it
- * Return: Ascii value for a letter
- */
-int hex_check(int num, char x)
-{
-	char *hex = "abcdef";
-	char *Hex = "ABCDEF";
-
-	num = num - 10;
-	if (x == 'x')
-		return (hex[num]);
 	else
-		return (Hex[num]);
-	return (0);
+	{
+		_putchar('0');
+		return (1);
+	}
+	return (count);
+}
+
+/**
+* print_x - takes an unsigned int an prints it in lowercase hex
+* @args_l: unsigned int to print
+* Return: size of the character written
+*/
+int print_x(va_list args_l)
+{
+	return (_print_hex(va_arg(args_l, unsigned int), 0));
+}
+
+/**
+* print_X - takes an unsigned int an prints it in uppercase hex
+* @args_l: unsigned int to print
+* Return: size of the character written
+*/
+int print_X(va_list args_l)
+{
+	return (_print_hex(va_arg(args_l, unsigned int), 1));
 }

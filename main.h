@@ -27,8 +27,8 @@ int print_number(va_list args_l);
 int print_unsgined_number(unsigned int n);
 int print_binary(va_list args_l);
 int print_octal(va_list args_l);
-int print_hex_x(va_list args_l);
-int print_hex_X(va_list args_l);
+int print_x(va_list args_l);
+int print_X(va_list args_l);
 int parse_format(const char *format, convert_t f_list[], va_list args);
 
 /* ====TESTS==== */
