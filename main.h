@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 #include <stdarg.h>
+#include <stdlib.h>
 #include <stddef.h>
 #include <limits.h>
 
@@ -32,5 +33,11 @@ int parse_format(const char *format, convert_t f_list[], va_list args);
 
 /* ====TESTS==== */
 int test_print_char(void);
+
+/* ====UTILS==== */
+unsigned int base_len(unsigned int num, int base);
+char *rev_str(char *);
+char *_memcpy(char *, char *, unsigned int );
+int hex_check(int num, char x);
 
 #endif
